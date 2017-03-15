@@ -55,7 +55,19 @@ final class FIDS extends BaseObject
     /**
      * @var
      */
+    protected $scheduledDate;
+    /**
+     * @var
+     */
     protected $scheduledTime;
+    /**
+     * @var
+     */
+    protected $actualDate;
+    /**
+     * @var
+     */
+    protected $actualTime;
     /**
      * @var
      */
@@ -84,6 +96,18 @@ final class FIDS extends BaseObject
      * @var
      */
     protected $weather;
+    /**
+     * @var
+     */
+    protected $terminal;
+    /**
+     * @var
+     */
+    protected $gate;
+    /**
+     * @var
+     */
+    protected $baggage;
     /**
      * @var
      */
@@ -816,6 +840,22 @@ final class FIDS extends BaseObject
     /**
      * @return mixed
      */
+    public function getScheduledDate()
+    {
+        return $this->scheduledDate;
+    }
+
+    /**
+     * @param mixed $scheduledDate
+     */
+    public function setScheduledDate($scheduledDate)
+    {
+        $this->scheduledDate = $scheduledDate;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getScheduledTime()
     {
         return $this->scheduledTime;
@@ -827,6 +867,38 @@ final class FIDS extends BaseObject
     public function setScheduledTime($scheduledTime)
     {
         $this->scheduledTime = $scheduledTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActualDate()
+    {
+        return $this->actualDate;
+    }
+
+    /**
+     * @param mixed $actualDate
+     */
+    public function setActualDate($actualDate)
+    {
+        $this->actualDate = $actualDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActualTime()
+    {
+        return $this->actualTime;
+    }
+
+    /**
+     * @param mixed $actualTime
+     */
+    public function setActualTime($actualTime)
+    {
+        $this->actualTime = $actualTime;
     }
 
     /**
@@ -923,5 +995,53 @@ final class FIDS extends BaseObject
     public function setWeather($weather)
     {
         $this->weather = $weather;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTerminal()
+    {
+        return $this->terminal;
+    }
+
+    /**
+     * @param mixed $terminal
+     */
+    public function setTerminal($terminal)
+    {
+        $this->terminal = $terminal;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGate()
+    {
+        return $this->gate;
+    }
+
+    /**
+     * @param mixed $gate
+     */
+    public function setGate($gate)
+    {
+        $this->gate = $gate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBaggage()
+    {
+        return $this->baggage;
+    }
+
+    /**
+     * @param mixed $baggage
+     */
+    public function setBaggage($baggage)
+    {
+        $this->baggage = $baggage;
     }
 }
