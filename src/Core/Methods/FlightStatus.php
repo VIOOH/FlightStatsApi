@@ -2,6 +2,7 @@
 
 namespace LArtie\FlightStatsApi\Core\Methods;
 
+use Carbon\Carbon;
 use LArtie\FlightStatsApi\Core\Objects\StatusFlight;
 
 /**
@@ -87,5 +88,53 @@ final class FlightStatus extends BaseMethod
         $method = "flight/status/{$carrier}/{$flight}/dep";
 
         return $this->get($this->buildMethodViaDate($method, $year, $month, $day), $data);
+    }
+
+    /**
+     * Returns the status of all flights departing (or having departed) from an airport within the specified hour,
+     * or within a window up to 6 hours wide if numHours is specified.
+     *
+     * @param $airport
+     * @param Carbon $date
+     * @param array $data
+     * @return array
+     */
+    public function departingFromAirport($airport, Carbon $date, $data = [])
+    {
+        return $this->get($this->airportStatusMethod('dep', $airport, $date), $data);
+    }
+
+    /**
+     *
+     * Returns the status of all flights arriving (or having arrived) at an airport within the specified hour,
+     * or within a window up to 6 hours wide if numHours is specified.
+     *
+     * @param $airport
+     * @param Carbon $date
+     * @param array $data
+     * @return array
+     */
+    public function arrivingAtAirport($airport, Carbon $date, $data = [])
+    {
+        return $this->get($this->airportStatusMethod('arr', $airport, $date), $data);
+    }
+
+    /**
+     * @param $flightType
+     * @param $airport
+     * @param Carbon $date
+     * @return string
+     */
+    protected function airportStatusMethod($flightType, $airport, Carbon $date)
+    {
+        return sprintf(
+            'airport/status/%s/%s/%s/%s/%s/%s',
+            $airport,
+            $flightType,
+            $date->year,
+            $date->month,
+            $date->day,
+            $date->hour
+        );
     }
 }
