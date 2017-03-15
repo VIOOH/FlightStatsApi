@@ -64,13 +64,18 @@ final class FIDS extends BaseMethod
     private $parameters = [];
 
     /**
+     * @var array
+     */
+    protected $requestedFields = [];
+
+    /**
      *
      * @param $airport
      * @return array
      */
     public function departures($airport)
     {
-        return $this->get($airport . '/departures');
+        return $this->get($airport . '/departures', $this->requestedFieldsQuery());
     }
 
     /**
@@ -79,7 +84,18 @@ final class FIDS extends BaseMethod
      */
     public function arrivals($airport)
     {
-        return $this->get($airport . '/arrivals');
+        return $this->get($airport . '/arrivals', $this->requestedFieldsQuery());
+    }
+
+    /**
+     * @param array $fields
+     * @return $this
+     */
+    public function withFields(array $fields)
+    {
+        $this->requestedFields = $fields;
+
+        return $this;
     }
 
     /**
@@ -107,5 +123,13 @@ final class FIDS extends BaseMethod
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    protected function requestedFieldsQuery()
+    {
+        return ['requestedFields' => implode(',', $this->requestedFields)];
     }
 }
