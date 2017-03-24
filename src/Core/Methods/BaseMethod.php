@@ -59,8 +59,9 @@ abstract class BaseMethod
      * BaseMethod constructor.
      * @param null $appId
      * @param null $appKey
+     * @param array $guzzleOptions
      */
-    final public function __construct($appId = null, $appKey = null)
+    final public function __construct($appId = null, $appKey = null, array $guzzleOptions = [])
     {
         if (is_null($appId)) {
             $appId = env('FLIGHTSTATS_APP_ID', null);
@@ -73,9 +74,12 @@ abstract class BaseMethod
         $this->appId = $appId;
         $this->appKey = $appKey;
 
-        $this->client = new Client([
-            'base_uri' => $this->baseUri
-        ]);
+        $this->client = new Client(
+            array_merge(
+                ['base_uri' => $this->baseUri],
+                $guzzleOptions
+            )
+        );
     }
 
     /**
